@@ -1,0 +1,40 @@
+<form [formGroup]="empForm" (ngSubmit)="SaveEmployee()">
+<mat-card>
+  <mat-card-header>
+    <h2>{{title}}</h2>
+  </mat-card-header>
+  <mat-card-content>
+      <mat-form-field>
+        <mat-label >News Id</mat-label>
+        <input matInput formControlName="id" >
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <mat-label>News title</mat-label>
+        <input matInput formControlName="Newstitle">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Content details</mat-label>
+
+        <textarea matInput formControlName="detailsContent" rows="10"></textarea>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category">
+          <mat-option value="">Select category</mat-option>
+          <mat-option value="Economy">Economy/Business</mat-option>
+          <mat-option value="Society">Society</mat-option>
+          <mat-option value="Sports">Sports</mat-option>
+        </mat-select>
+      </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions>
+    <button type="submit" mat-raised-button color="primary">Save</button>
+    <a mat-raised-button color="accent" (click)="closepopup()">Close</a>
+  </mat-card-actions>
+</mat-card>
+</form>
+
