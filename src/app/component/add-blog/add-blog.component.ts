@@ -93,8 +93,8 @@ export class AddBlogComponent implements OnInit {
       if (!this.isEdit) {
         this.store.dispatch(addBlog({ data: _data }));
       } else {
-        // this.store.dispatch(updateBlog({ data: _data }));
-        this.blogService.Update(_data);
+        this.store.dispatch(updateBlog({ data: _data }));
+        // this.blogService.Update(_data);
       }
       this.closepopup();
     }

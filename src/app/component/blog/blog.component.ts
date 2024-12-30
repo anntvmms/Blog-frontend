@@ -51,15 +51,15 @@ export class BlogComponent implements OnInit, OnDestroy {
   }
 
   GetallBlog() {
-    // this.store.dispatch(loadBlog());
-    // this.store.select(getBlgList).subscribe((item) => {
-    //   this.blgList = item;
-    //   this.dataSource = new MatTableDataSource(this.blgList);
-    // });
-    this.blogService.GetAll().subscribe((item) => {
+    this.store.dispatch(loadBlog());
+    this.store.select(getBlgList).subscribe((item) => {
       this.blgList = item;
       this.dataSource = new MatTableDataSource(this.blgList);
     });
+    // this.blogService.GetAll().subscribe((item) => {
+    //   this.blgList = item;
+    //   this.dataSource = new MatTableDataSource(this.blgList);
+    // });
   }
 
   addblog() {
