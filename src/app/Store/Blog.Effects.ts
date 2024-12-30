@@ -40,10 +40,10 @@ export class empEffect {
     this.action$.pipe(
       ofType(deleteBlog),
       switchMap((action) => {
-        return this.service.Delete(action.empId).pipe(
+        return this.service.Delete(action.blgId).pipe(
           switchMap((data) => {
             return of(
-              deleteBlogSuc({ empId: action.empId }),
+              deleteBlogSuc({ blgId: action.blgId }),
               this.Showalert('delete Successfuly', 'pass')
             );
           }),

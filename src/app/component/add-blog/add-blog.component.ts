@@ -18,7 +18,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { Store } from '@ngrx/store';
 import { addBlog, getBlog, updateBlog } from '../../Store/Blog.Action';
-import { getEmpList, selectBlog } from '../../Store/Blog.Selecter';
+import { getBlgList, selectBlog } from '../../Store/Blog.Selecter';
+import { BlogService } from '../../service/blog.service';
 
 @Component({
   selector: 'app-add-blog',
@@ -46,39 +47,20 @@ export class AddBlogComponent implements OnInit {
     private store: Store,
     private ref: MatDialogRef<AddBlogComponent>,
     private toastr: ToastrService,
+    private blogService: BlogService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
-  // ngOnInit(): void {
-  //   this.dialodata = this.data;
-  //   if(this.dialodata.code > 0){
-  //     this.title = 'Edit News';
-  //     this.isEdit = true;
-  //     this.store.dispatch(getBlog({empId: this.dialodata.code}));
-  //     this.store.select(selectBlog).subscribe(item=>{
-  //       let _data = item;
-  //       if(_data != null){
-  //         this.empForm.setValue({
-  //           id: _data.id,
-  //           newsTitle: _data.newsTitle,
-  //           doj: _data.doj,
-  //           category: _data.category,
-  //           detailsContent: _data.detailsContent
-  //         })
-  //       }
-  //     })
-  //   }
-  // }
 
   ngOnInit(): void {
     this.dialodata = this.data;
     if (this.dialodata.code > 0) {
       this.title = 'Edit News';
       this.isEdit = true;
-      this.store.dispatch(getBlog({ empId: this.dialodata.code }));
+      this.store.dispatch(getBlog({ blgId: this.dialodata.code }));
       this.store.select(selectBlog).subscribe((item) => {
         let _data = item;
         if (_data != null) {
-          this.empForm.setValue({
+          this.blgForm.setValue({
             id: _data.id,
             newsTitle: _data.newsTitle,
             doj: _data.doj,
@@ -88,10 +70,9 @@ export class AddBlogComponent implements OnInit {
         }
       });
     }
-
   }
 
-  empForm = new FormGroup({
+  blgForm = new FormGroup({
     id: new FormControl(0),
     newsTitle: new FormControl('', Validators.required),
     doj: new FormControl(new Date(), Validators.required),
@@ -100,19 +81,20 @@ export class AddBlogComponent implements OnInit {
   });
 
   SaveBlog() {
-    if (this.empForm.valid) {
+    if (this.blgForm.valid) {
       let _data: Blog = {
-        id: this.empForm.value.id as number,
-        newsTitle: this.empForm.value.newsTitle as string,
-        doj: new Date(this.empForm.value.doj as Date),
-        category: this.empForm.value.category as string,
-        detailsContent: this.empForm.value.detailsContent as string,
+        id: this.blgForm.value.id as number,
+        newsTitle: this.blgForm.value.newsTitle as string,
+        doj: new Date(this.blgForm.value.doj as Date),
+        category: this.blgForm.value.category as string,
+        detailsContent: this.blgForm.value.detailsContent as string,
       };
 
       if (!this.isEdit) {
         this.store.dispatch(addBlog({ data: _data }));
       } else {
-        this.store.dispatch(updateBlog({ data: _data }));
+        // this.store.dispatch(updateBlog({ data: _data }));
+        this.blogService.Update(_data);
       }
       this.closepopup();
     }

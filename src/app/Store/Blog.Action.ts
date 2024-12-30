@@ -26,10 +26,10 @@ export const loadBlogFail = createAction(
   props<{ errMsg: string }>()
 );
 
-export const deleteBlog = createAction(DELETE_BLOG, props<{ empId: number }>());
+export const deleteBlog = createAction(DELETE_BLOG, props<{ blgId: number }>());
 export const deleteBlogSuc = createAction(
   DELETE_BLOG_SUCC,
-  props<{ empId: number }>()
+  props<{ blgId: number }>()
 );
 
 export const addBlog = createAction(ADD_BLOG, props<{ data: Blog }>());
@@ -41,6 +41,6 @@ export const updateBlogSuc = createAction(
   props<{ data: Blog }>()
 );
 
-export const getBlog = createAction(GET_BLOG, props<{ empId: number }>());
+export const getBlog = createAction(GET_BLOG, props<{ blgId: number }>());
 
 export const emptyAction = createAction('empty');

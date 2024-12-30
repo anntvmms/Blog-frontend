@@ -3,7 +3,7 @@ import { BlogModel } from './Blog.Model';
 export const blogState: BlogModel = {
   list: [],
   errormessage: '',
-  empobj: {
+  blgobj: {
     id: 0,
     newsTitle: '',
     doj: new Date(),

@@ -14,8 +14,8 @@ export class BlogService {
     return this.http.get<Blog[]>(this.apiUrl);
   }
 
-  Get(empId: number) {
-    return this.http.get<Blog>(this.apiUrl + '/' + empId);
+  Get(blgId: number) {
+    return this.http.get<Blog>(this.apiUrl + '/' + blgId);
   }
 
   Create(data: Blog) {
@@ -26,7 +26,7 @@ export class BlogService {
     return this.http.put(this.apiUrl + '/' + data.id, data);
   }
 
-  Delete(empId: number) {
-    return this.http.delete(this.apiUrl + '/' + empId);
+  Delete(blgId: number) {
+    return this.http.delete(this.apiUrl + '/' + blgId);
   }
 }
