@@ -2,17 +2,17 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { AddEmployeeComponent } from '../add-blog/add-blog.component';
-import { Employee } from '../../model/Employee';
+import { AddBlogComponent } from '../add-blog/add-blog.component';
+import { Blog } from '../../model/Blog';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { deleteEmployee, loadEmployee } from '../../Store/Employee.Action';
-import { getEmpList } from '../../Store/Employee.Selecter';
+import { deleteBlog, loadBlog } from '../../Store/Blog.Action';
+import { getEmpList } from '../../Store/Blog.Selecter';
 
 @Component({
-  selector: 'app-employee',
+  selector: 'app-blog',
   imports: [
     MatCardModule,
     MatButtonModule,
@@ -20,15 +20,15 @@ import { getEmpList } from '../../Store/Employee.Selecter';
     MatTableModule,
     CommonModule,
   ],
-  templateUrl: './employee.component.html',
-  styleUrl: './employee.component.css',
+  templateUrl: './blog.component.html',
+  styleUrl: './blog.component.css',
 })
-export class EmployeeComponent implements OnInit, OnDestroy {
-  empList: Employee[] = [];
-  dataSource!: MatTableDataSource<Employee>;
+export class BlogComponent implements OnInit, OnDestroy {
+  empList: Blog[] = [];
+  dataSource!: MatTableDataSource<Blog>;
   displayedColumns: string[] = [
     'id',
-    'Newstitle',
+    'newsTitle',
     'category',
     'detailsContent',
     'doj',
@@ -42,36 +42,36 @@ export class EmployeeComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
   ngOnInit(): void {
-    this.GetallEmployee();
+    this.GetallBlog();
   }
 
-  GetallEmployee() {
-    this.store.dispatch(loadEmployee());
+  GetallBlog() {
+    this.store.dispatch(loadBlog());
     this.store.select(getEmpList).subscribe((item) => {
       this.empList = item;
       this.dataSource = new MatTableDataSource(this.empList);
     });
   }
 
-  addemployee() {
+  addblog() {
     this.openpopup(0);
   }
 
   addCategory() {}
 
-  DeleteEmployee(empId: number) {
+  DeleteBlog(empId: number) {
     if (confirm('Are you sure to delete it?')) {
-      this.store.dispatch(deleteEmployee({ empId: empId }));
+      this.store.dispatch(deleteBlog({ empId: empId }));
     }
   }
 
-  EditEmployee(empId: number) {
+  EditBlog(empId: number) {
     this.openpopup(empId);
   }
 
   openpopup(empid: number) {
     this.dialog
-      .open(AddEmployeeComponent, {
+      .open(AddBlogComponent, {
         width: '50%',
         data: {
           code: empid,
@@ -79,7 +79,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
       })
       .afterClosed()
       .subscribe((o) => {
-        this.GetallEmployee();
+        this.GetallBlog();
       });
   }
 }

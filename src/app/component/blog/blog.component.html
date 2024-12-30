@@ -1,0 +1,65 @@
+<mat-card>
+  <mat-card-header>
+    <button mat-raised-button color="primary" (click)="addblog()">
+      Add news
+    </button>
+    <!-- <button mat-raised-button color="primary" (click)="addCategory()">Add Category</button>  -->
+  </mat-card-header>
+  <mat-card-content>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>News ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="newsTitle">
+        <th mat-header-cell *matHeaderCellDef>News title</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.newsTitle | slice : 0 : 30 }}
+          <span *ngIf="element.newsTitle.length > 30">...</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="detailsContent">
+        <th mat-header-cell *matHeaderCellDef>Content details</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.detailsContent | slice : 0 : 50 }}
+          <span *ngIf="element.detailsContent.length > 50">...</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="doj">
+        <th mat-header-cell *matHeaderCellDef>Created date</th>
+        <td mat-cell *matCellDef="let element">{{ element.doj | date }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef>News Category</th>
+        <td mat-cell *matCellDef="let element">{{ element.category }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="EditBlog(element.id)"
+          >
+            Edit
+          </button>
+          <button
+            mat-raised-button
+            color="accent"
+            (click)="DeleteBlog(element.id)"
+          >
+            Delete
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </mat-card-content>
+</mat-card>

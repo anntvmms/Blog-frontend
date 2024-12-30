@@ -1,4 +1,8 @@
-import { ApplicationConfig, provideZoneChangeDetection, isDevMode } from '@angular/core';
+import {
+  ApplicationConfig,
+  provideZoneChangeDetection,
+  isDevMode,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -8,8 +12,8 @@ import { provideToastr } from 'ngx-toastr';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { employeeReducer } from './Store/Employee.Reducer';
-import { empEffect } from './Store/Employee.Effects';
+import { blogReducer } from './Store/Blog.Reducer';
+import { empEffect } from './Store/Blog.Effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,7 +22,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHttpClient(),
     provideToastr(),
-    provideStore({'emp': employeeReducer}),
+    provideStore({ emp: blogReducer }),
     provideEffects([empEffect]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
   ],

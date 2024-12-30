@@ -1,7 +1,6 @@
-export interface Employee{
-
+export interface Blog {
   id: number;
-  Newstitle: string;
+  newsTitle: string;
   detailsContent: string;
   doj: Date;
   category: string;

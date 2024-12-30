@@ -1,28 +1,28 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Employee } from '../model/Employee';
+import { Blog } from '../model/Blog';
 
 @Injectable({
   providedIn: 'root',
 })
-export class EmployeeService {
-  apiUrl = 'http://localhost:3000/employee';
+export class BlogService {
+  apiUrl = 'http://localhost:3000/api/blogs';
 
   constructor(private http: HttpClient) {}
 
   GetAll() {
-    return this.http.get<Employee[]>(this.apiUrl);
+    return this.http.get<Blog[]>(this.apiUrl);
   }
 
   Get(empId: number) {
-    return this.http.get<Employee>(this.apiUrl + '/' + empId);
+    return this.http.get<Blog>(this.apiUrl + '/' + empId);
   }
 
-  Create(data: Employee) {
+  Create(data: Blog) {
     return this.http.post(this.apiUrl, data);
   }
 
-  Update(data: Employee) {
+  Update(data: Blog) {
     return this.http.put(this.apiUrl + '/' + data.id, data);
   }
 
